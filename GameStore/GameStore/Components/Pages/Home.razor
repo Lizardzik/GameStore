@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+
+<PageTitle>Home</PageTitle>
+
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to "We Are Gaming!"</h1>
+        <p class="lead">Your one-stop shop for the latest and greatest in video gaming.</p>
+        <hr class="my-4">
+        <p>Discover a wide range of games, consoles, accessories, and more.</p>
+        <p class="lead">
+            <AuthorizeView>
+                <Authorized>
+                    <button class="btn btn-primary btn-lg" @onclick="NavigateToProducts">Browse Products</button>
+                </Authorized>
+                <NotAuthorized>
+                    <button class="btn btn-warning btn-lg" @onclick="NavigateToLogin">Login to Browse Products</button>
+                </NotAuthorized>
+            </AuthorizeView>
+        </p>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <GameStore.Components.Pages.Dashboard.ProductCard ImageUrl="images/games.jpg"
+                                                          Title="Latest Games"
+                                                          Description="Check out the latest releases and find your next favorite game."
+                                                          LinkUrl="latest-games" />
+        <GameStore.Components.Pages.Dashboard.ProductCard ImageUrl="images/consoles.png"
+                                                          Title="Consoles"
+                                                          Description="Browse our selection of the latest gaming consoles."
+                                                          LinkUrl="consoles" />
+        <GameStore.Components.Pages.Dashboard.ProductCard ImageUrl="images/accessories.jpg"
+                                                          Title="Accessories"
+                                                          Description="Find the perfect accessories to enhance your gaming experience."
+                                                          LinkUrl="accessories" />
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center">
+            <h2>Why Shop with Us?</h2>
+            <p>At GameStore, we are passionate about gaming. Our team of experts is dedicated to bringing you the best in gaming products and customer service. Whether you are a casual gamer or a hardcore enthusiast, we have something for everyone.</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void NavigateToProducts()
+    {
+        NavigationManager.NavigateTo("products");
+    }
+
+    private void NavigateToLogin()
+    {
+        NavigationManager.NavigateTo("Account/Login");
+    }
+}

@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="col-md-4">
+    <div class="card bg-light mb-3 h-100">
+        <img class="card-img-top" src="@ImageUrl" alt="@Title">
+    
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">@Title</h5>
+            <p class="card-text">@Description</p>
+            <AuthorizeView>
+                <Authorized>
+                    <a href="" class="btn btn-outline-info mt-auto">@ButtonText</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="Account/Login" class="btn btn-outline-info mt-auto">@ButtonText</a>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string ImageUrl { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string LinkUrl { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ButtonText { get; set; } = "View More";
+
+}
